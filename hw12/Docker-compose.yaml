@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ######################################################################
+  servicesdb:
+    hostname: plantdb
+    image: mysql:latest
+    container_name: plantdb
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=plantdb
+      - MYSQL_ROOT_PASSWORD=000000
+    volumes:
+      - ./resources/static/database:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    ports:
+      - "13306:3306"
+    networks:
+      - app-network
+  ######################################################################
+networks:
+  app-network:
+    driver: bridge
